@@ -17,7 +17,7 @@
 <div id="section_container">
     <section id="login_section" class="active">
         <header>
-            <h1 class="title">${fns:getConfig('productName')}</h1>
+            <h1 class="title">${fns:getConfig('productName')}10.6.2.随机</h1>
             <!-- <nav class="right">
                 <a data-target="section" data-icon="info" href="#about_section"></a>
             </nav> -->

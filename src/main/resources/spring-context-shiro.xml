@@ -19,7 +19,7 @@
 				${adminPath}/cas = cas
 				${adminPath}/login = authc
 				${adminPath}/logout = logout
-				${adminPath}/** = user
+				${adminPath}/** = user       <!-- kickout,user -->
 				/act/editor/** = user
 				/ReportServer/** = user
 			</value>
@@ -36,12 +36,23 @@
             <map>
                 <entry key="cas" value-ref="casFilter"/>
                 <entry key="authc" value-ref="formAuthenticationFilter"/>
+                <!-- <entry key="kickout" value-ref="kickoutSessionControlFilter"/> -->
             </map>
         </property>
 		<property name="filterChainDefinitions">
 			<ref bean="shiroFilterChainDefinitions"/>
 		</property>
 	</bean>
+	
+	<!-- 只允许用户登录一次
+	<bean id="kickoutSessionControlFilter" class="com.thinkgem.jeesite.common.filter.KickoutSessionControlFilter">
+        <property name="cacheManager" ref="shiroCacheManager"/>
+        <property name="sessionManager" ref="sessionManager"/>
+
+        <property name="kickoutAfter" value="false"/>
+        <property name="maxSession" value="1"/>
+        <property name="kickoutUrl" value="/login?kickout=0"/>
+    </bean> -->
 	
 	<!-- CAS认证过滤器 -->  
 	<bean id="casFilter" class="org.apache.shiro.cas.CasFilter">  
@@ -74,6 +85,10 @@
 	<!-- 指定本系统SESSIONID, 默认为: JSESSIONID 问题: 与SERVLET容器名冲突, 如JETTY, TOMCAT 等默认JSESSIONID,
 		当跳出SHIRO SERVLET时如ERROR-PAGE容器会为JSESSIONID重新分配值导致登录会话丢失! -->
 	<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+		<!-- 不会暴露给客户端 -->
+        <property name="httpOnly" value="true"/>
+        <!-- 设置Cookie的过期时间，秒为单位，默认-1表示关闭浏览器时过期Cookie -->
+        <property name="maxAge" value="-1"/>
 	    <constructor-arg name="name" value="jeesite.session.id"/>
 	</bean>
 

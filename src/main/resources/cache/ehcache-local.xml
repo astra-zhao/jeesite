@@ -4,11 +4,17 @@
 	<diskStore path="../temp/jeesite/ehcache" />
 
 	<!-- 默认缓存配置. 自动失效：最后一次访问时间间隔300秒失效，若没有访问过自创建时间600秒失效。-->
-	<defaultCache maxEntriesLocalHeap="1000" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"
-		overflowToDisk="true" statistics="true"/>
+<!-- 	<defaultCache maxEntriesLocalHeap="1000" eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"
+		overflowToDisk="true" statistics="true"/> -->
+	<defaultCache maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="120" timeToLiveSeconds="120" 
+    	maxEntriesLocalDisk="10000000" diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LFU" statistics="true">
+    	<persistence strategy="localTempSwap"/>
+    </defaultCache>
 	
 	<!-- 系统缓存 -->
-	<cache name="sysCache" maxEntriesLocalHeap="1000" eternal="true" overflowToDisk="true" statistics="true"/>
+	<!-- <cache name="sysCache" maxEntriesLocalHeap="1000" eternal="true" overflowToDisk="true" statistics="true"/> -->
+	<cache name="sysCache" maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="120" timeToLiveSeconds="120" 
+    	maxEntriesLocalDisk="10000000" diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LFU" statistics="true">
 	
 	<!-- 用户缓存 -->
 	<cache name="userCache" maxEntriesLocalHeap="1000" eternal="true" overflowToDisk="true" statistics="true"/>
@@ -29,5 +35,9 @@
 	<!-- 系统活动会话缓存 -->
     <cache name="activeSessionsCache" maxEntriesLocalHeap="10000" eternal="true" overflowToDisk="true"
            diskPersistent="true" diskExpiryThreadIntervalSeconds="600" statistics="true"/>
+    <!-- 踢出会话缓存 -->       
+    <cache name="shiro-kickout-session"  maxEntriesLocalHeap="2000" eternal="false" timeToIdleSeconds="3600" timeToLiveSeconds="0"
+           overflowToDisk="false" statistics="true">
+    </cache>
     	
 </ehcache>
