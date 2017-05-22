@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title><sitemesh:title default="欢迎光临"/> - ${site.title} - Powered By JeeSite</title>
+	<title><sitemesh:title default="欢迎光临"/> - ${site.title} - Powered By lb-tech</title>
 	<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">

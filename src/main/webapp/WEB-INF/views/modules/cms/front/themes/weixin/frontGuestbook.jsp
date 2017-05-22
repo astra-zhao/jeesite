@@ -5,8 +5,8 @@
 <head>
 	<title>留言板</title>
 	<meta name="decorator" content="cms_default_${site.theme}"/>
-	<meta name="description" content="JeeSite ${site.description}" />
-	<meta name="keywords" content="JeeSite ${site.keywords}" />
+	<meta name="description" content="lb-tech ${site.description}" />
+	<meta name="keywords" content="lb-tech ${site.keywords}" />
 	<script src="${ctxStaticTheme}/lyb/jquery-1.7.1.min.js"></script>
 	<script src="${ctxStaticTheme}/lyb/jquery.alerts.js" type="text/javascript"></script>
 	<link href="${ctxStaticTheme}/lyb/jquery.alerts.css" rel="stylesheet" type="text/css" media="screen" />

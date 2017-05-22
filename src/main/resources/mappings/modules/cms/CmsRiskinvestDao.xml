@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.lbtech.platform.modules.cms.dao.CmsRiskinvestDao">
+    
+	<sql id="cmsRiskinvestColumns">
+		a.id AS "id",
+		a.submitname AS "submitname",
+		a.commandname AS "commandname",
+		a.company AS "company",
+		a.emergencyrisk AS "emergencyrisk",
+		a.responserisk AS "responserisk",
+		a.guardorgrisk AS "guardorgrisk",
+		a.recordrisk AS "recordrisk",
+		a.guardrisk AS "guardrisk",
+		a.registerrisk AS "registerrisk",
+		a.personresprisk AS "personresprisk",
+		a.buildcheckrisk AS "buildcheckrisk",
+		a.buildwarnrisk AS "buildwarnrisk",
+		a.reportrisk AS "reportrisk",
+		a.create_date AS "createDate",
+		a.re_user_id AS "reUserId",
+		a.re_date AS "reDate",
+		a.re_content AS "reContent",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="cmsRiskinvestJoins">
+	</sql>
+    
+	<select id="get" resultType="CmsRiskinvest">
+		SELECT 
+			<include refid="cmsRiskinvestColumns"/>
+		FROM cms_riskinvest a
+		<include refid="cmsRiskinvestJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="CmsRiskinvest">
+		SELECT 
+			<include refid="cmsRiskinvestColumns"/>
+		FROM cms_riskinvest a
+		<include refid="cmsRiskinvestJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="CmsRiskinvest">
+		SELECT 
+			<include refid="cmsRiskinvestColumns"/>
+		FROM cms_riskinvest a
+		<include refid="cmsRiskinvestJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO cms_riskinvest(
+			id,
+			submitname,
+			commandname,
+			company,
+			emergencyrisk,
+			responserisk,
+			guardorgrisk,
+			recordrisk,
+			guardrisk,
+			registerrisk,
+			personresprisk,
+			buildcheckrisk,
+			buildwarnrisk,
+			reportrisk,
+			create_date,
+			re_user_id,
+			re_date,
+			re_content,
+			del_flag
+		) VALUES (
+			#{id},
+			#{submitname},
+			#{commandname},
+			#{company},
+			#{emergencyrisk},
+			#{responserisk},
+			#{guardorgrisk},
+			#{recordrisk},
+			#{guardrisk},
+			#{registerrisk},
+			#{personresprisk},
+			#{buildcheckrisk},
+			#{buildwarnrisk},
+			#{reportrisk},
+			#{createDate},
+			#{reUserId},
+			#{reDate},
+			#{reContent},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE cms_riskinvest SET 	
+			submitname = #{submitname},
+			commandname = #{commandname},
+			company = #{company},
+			emergencyrisk = #{emergencyrisk},
+			responserisk = #{responserisk},
+			guardorgrisk = #{guardorgrisk},
+			recordrisk = #{recordrisk},
+			guardrisk = #{guardrisk},
+			registerrisk = #{registerrisk},
+			personresprisk = #{personresprisk},
+			buildcheckrisk = #{buildcheckrisk},
+			buildwarnrisk = #{buildwarnrisk},
+			reportrisk = #{reportrisk},
+			re_user_id = #{reUserId},
+			re_date = #{reDate},
+			re_content = #{reContent}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE cms_riskinvest SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

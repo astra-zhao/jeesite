@@ -5,8 +5,8 @@
 <head>
 	<title>首页</title>
 	<meta name="decorator" content="cms_default_${site.theme}"/>
-	<meta name="description" content="JeeSite ${site.description}" />
-	<meta name="keywords" content="JeeSite ${site.keywords}" />
+	<meta name="description" content="lb-tech ${site.description}" />
+	<meta name="keywords" content="lb-tech ${site.keywords}" />
 </head>
 <body>
     <div class="hero-unit" style="padding-bottom:35px;margin:10px 0;">

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ehcache updateCheck="false" name="defaultCache">
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xsi:noNamespaceSchemaLocation="ehcache.xsd" dynamicConfig="true" 
+    monitoring="autodetect" updateCheck="false" name="defaultCache">
 
 	<diskStore path="../temp/jeesite/ehcache" />
 
@@ -15,29 +17,48 @@
 	<!-- <cache name="sysCache" maxEntriesLocalHeap="1000" eternal="true" overflowToDisk="true" statistics="true"/> -->
 	<cache name="sysCache" maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="120" timeToLiveSeconds="120" 
     	maxEntriesLocalDisk="10000000" diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LFU" statistics="true">
+    	<persistence strategy="localTempSwap"/>
+    </cache>
 	
 	<!-- 用户缓存 -->
-	<cache name="userCache" maxEntriesLocalHeap="1000" eternal="true" overflowToDisk="true" statistics="true"/>
+	<cache name="userCache" maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="120" timeToLiveSeconds="120" 
+    	maxEntriesLocalDisk="10000000" diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LFU" statistics="true">
+    	<persistence strategy="localTempSwap"/>
+    </cache>
 	
 	<!-- 集团缓存 -->
-	<cache name="corpCache" maxEntriesLocalHeap="1000" eternal="true" overflowToDisk="true" statistics="true"/>
+	<cache name="corpCache" maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="120" timeToLiveSeconds="120" 
+    	maxEntriesLocalDisk="10000000" diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LFU" statistics="true">
+    	<persistence strategy="localTempSwap"/>
+    </cache>
 	
 	<!-- 内容管理模块缓存 -->
-	<cache name="cmsCache" maxEntriesLocalHeap="1000" eternal="true" overflowToDisk="true" statistics="true"/>
+	<cache name="cmsCache" maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="120" timeToLiveSeconds="120" 
+    	maxEntriesLocalDisk="10000000" diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LFU" statistics="true">
+    	<persistence strategy="localTempSwap"/>
+    </cache>
     
 	<!-- 工作流模块缓存 -->
-	<cache name="actCache" maxEntriesLocalHeap="100" eternal="true" overflowToDisk="true" statistics="true"/>
+	<cache name="actCache" maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="120" timeToLiveSeconds="120" 
+    	maxEntriesLocalDisk="10000000" diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LFU" statistics="true">
+    	<persistence strategy="localTempSwap"/>
+    </cache>
 	
     <!-- 简单页面缓存 -->
-    <cache name="pageCachingFilter" maxEntriesLocalHeap="1000" eternal="false" timeToIdleSeconds="120"
-    	timeToLiveSeconds="120" overflowToDisk="true" memoryStoreEvictionPolicy="LFU" statistics="true"/>
+    <cache name="pageCachingFilter" maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="120" timeToLiveSeconds="120" 
+    	maxEntriesLocalDisk="10000000" diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LFU" statistics="true">
+    	<persistence strategy="localTempSwap"/>
+    </cache>
 	
 	<!-- 系统活动会话缓存 -->
-    <cache name="activeSessionsCache" maxEntriesLocalHeap="10000" eternal="true" overflowToDisk="true"
-           diskPersistent="true" diskExpiryThreadIntervalSeconds="600" statistics="true"/>
+    <cache name="activeSessionsCache" maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="120" timeToLiveSeconds="120" 
+    	maxEntriesLocalDisk="10000000" diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LFU" statistics="true">
+    	<persistence strategy="localTempSwap"/>
+    </cache>
     <!-- 踢出会话缓存 -->       
-    <cache name="shiro-kickout-session"  maxEntriesLocalHeap="2000" eternal="false" timeToIdleSeconds="3600" timeToLiveSeconds="0"
-           overflowToDisk="false" statistics="true">
+    <cache name="shiro-kickout-session"  maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="120" timeToLiveSeconds="120" 
+    	maxEntriesLocalDisk="10000000" diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LFU" statistics="true">
+    	<persistence strategy="localTempSwap"/>
     </cache>
     	
 </ehcache>

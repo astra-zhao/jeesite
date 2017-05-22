@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.lbtech.platform.modules.cms.dao.CmsInsuranceorderDao">
+    
+	<sql id="cmsInsuranceorderColumns">
+		a.id AS "id",
+		a.standardproperty AS "standardproperty",
+		a.standardpropertyex AS "standardpropertyex",
+		a.publicproperty AS "publicproperty",
+		a.publicelevator AS "publicelevator",
+		a.publicsocial AS "publicsocial",
+		a.publicswimming AS "publicswimming",
+		a.publicparking AS "publicparking",
+		a.publicfood AS "publicfood",
+		a.publicemployer AS "publicemployer",
+		a.groupaccident AS "groupaccident",
+		a.machinedamage AS "machinedamage",
+		a.businessinterruption AS "businessinterruption",
+		a.machineinterruption AS "machineinterruption",
+		a.create_date AS "createDate",
+		a.re_user_id AS "reUserId",
+		a.re_date AS "reDate",
+		a.re_content AS "reContent",
+		a.del_flag AS "delFlag",
+		a.amount AS "amount",
+		a.submitname AS "submitname",
+		a.submitphone AS "submitphone",
+		a.company AS "company"
+	</sql>
+	
+	<sql id="cmsInsuranceorderJoins">
+	</sql>
+    
+	<select id="get" resultType="CmsInsuranceorder">
+		SELECT 
+			<include refid="cmsInsuranceorderColumns"/>
+		FROM cms_insuranceorder a
+		<include refid="cmsInsuranceorderJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="CmsInsuranceorder">
+		SELECT 
+			<include refid="cmsInsuranceorderColumns"/>
+		FROM cms_insuranceorder a
+		<include refid="cmsInsuranceorderJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="submitname != null and submitname != ''">
+				AND a.submitname = #{submitname}
+			</if>
+			<if test="submitphone != null and submitphone != ''">
+				AND a.submitphone = #{submitphone}
+			</if>
+			<if test="company != null and company != ''">
+				AND a.company = #{company}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="CmsInsuranceorder">
+		SELECT 
+			<include refid="cmsInsuranceorderColumns"/>
+		FROM cms_insuranceorder a
+		<include refid="cmsInsuranceorderJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO cms_insuranceorder(
+			id,
+			standardproperty,
+			standardpropertyex,
+			publicproperty,
+			publicelevator,
+			publicsocial,
+			publicswimming,
+			publicparking,
+			publicfood,
+			publicemployer,
+			groupaccident,
+			machinedamage,
+			businessinterruption,
+			machineinterruption,
+			create_date,
+			re_user_id,
+			re_date,
+			re_content,
+			del_flag,
+			amount,
+			submitname,
+			submitphone,
+			company
+		) VALUES (
+			#{id},
+			#{standardproperty},
+			#{standardpropertyex},
+			#{publicproperty},
+			#{publicelevator},
+			#{publicsocial},
+			#{publicswimming},
+			#{publicparking},
+			#{publicfood},
+			#{publicemployer},
+			#{groupaccident},
+			#{machinedamage},
+			#{businessinterruption},
+			#{machineinterruption},
+			#{createDate},
+			#{reUserId},
+			#{reDate},
+			#{reContent},
+			#{delFlag},
+			#{amount},
+			#{submitname},
+			#{submitphone},
+			#{company}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE cms_insuranceorder SET 	
+			standardproperty = #{standardproperty},
+			standardpropertyex = #{standardpropertyex},
+			publicproperty = #{publicproperty},
+			publicelevator = #{publicelevator},
+			publicsocial = #{publicsocial},
+			publicswimming = #{publicswimming},
+			publicparking = #{publicparking},
+			publicfood = #{publicfood},
+			publicemployer = #{publicemployer},
+			groupaccident = #{groupaccident},
+			machinedamage = #{machinedamage},
+			businessinterruption = #{businessinterruption},
+			machineinterruption = #{machineinterruption},
+			re_user_id = #{reUserId},
+			re_date = #{reDate},
+			re_content = #{reContent},
+			amount = #{amount},
+			submitname = #{submitname},
+			submitphone = #{submitphone},
+			company = #{company}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE cms_insuranceorder SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>个人中心</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" type="text/css" href="css/public.css">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" type="text/css" href="css/swiper.css">
+	<link rel="stylesheet" type="text/css" href="css/zdialog.css">
+</head>
+<body class="body-bg">
+	<header>
+		<div class="head">
+			个人中心
+			<a class="iconfont icon-shangchengicon01 top-bar-back" href="javascript:history.back(1)"></a>
+			<a class="quit" href="javascript:void(0);" id="confirmBtn">退出</a>
+		</div>	
+	</header>
+	<section class="content-top">
+		<div class="personal">
+			<div class="title">
+				<div class="avatar">
+					<img src="images/avatar.png">
+				</div>
+				<div class="name">13500000000</div>
+			</div>
+			<div class="personal-menu">
+				<ul>
+					<li>
+						<a href="order.html">
+							<i class="iconfont icon-order"></i>
+							我的订单
+							<i class="iconfont icon-jiantou right"></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+<script type="text/javascript" src="js/jquery220m.js"></script>
+<script type="text/javascript" src="js/zdialog.js"></script>
+<script type="text/javascript">
+   $("#confirmBtn").click(function(){
+   $.DialogByZ.Confirm({Title: "", Content: "你确定要退出吗？",FunL:confirmL,FunR:Immediate})
+   })
+   function confirmL(){
+			$.DialogByZ.Close();
+			window.open("index.html","_self")
+   }
+   function Immediate(){
+	$.DialogByZ.Close();  
+   }
+</script>
+</body>
+</html>

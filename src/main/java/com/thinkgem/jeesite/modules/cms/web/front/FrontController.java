@@ -37,6 +37,11 @@ import com.thinkgem.jeesite.modules.cms.service.LinkService;
 import com.thinkgem.jeesite.modules.cms.service.SiteService;
 import com.thinkgem.jeesite.modules.cms.utils.CmsUtils;
 
+import net.lbtech.platform.modules.cms.entity.CmsInsuranceorder;
+import net.lbtech.platform.modules.cms.entity.CmsRiskinvest;
+import net.lbtech.platform.modules.cms.service.CmsInsuranceorderService;
+import net.lbtech.platform.modules.cms.service.CmsRiskinvestService;
+
 /**
  * 网站Controller
  * @author ThinkGem
@@ -58,6 +63,10 @@ public class FrontController extends BaseController{
 	private CategoryService categoryService;
 	@Autowired
 	private SiteService siteService;
+	@Autowired
+	private CmsRiskinvestService cmsRiskinvestService;
+	@Autowired
+	private CmsInsuranceorderService cmsInsuranceorderService;
 	
 	/**
 	 * 网站首页
@@ -68,6 +77,39 @@ public class FrontController extends BaseController{
 		model.addAttribute("site", site);
 		model.addAttribute("isIndex", true);
 		return "modules/cms/front/themes/"+site.getTheme()+"/frontIndex";
+	}
+	
+	/**
+	 * 风险调查首页
+	 */
+	@RequestMapping(value="riskinvest")
+	public String riskinvest(Model model){
+		Site site = CmsUtils.getSite(Site.defaultSiteId());
+		CmsRiskinvest questiondes=new CmsRiskinvest();
+		model.addAttribute("site", site);
+		model.addAttribute("questiondes", questiondes);
+		return "modules/cms/front/themes/"+site.getTheme()+"/riskinvest";
+	}
+	
+	@RequestMapping(value = "riskinvest/save", method=RequestMethod.POST)
+	public String riskinvestsave(CmsRiskinvest cmsRiskinvest){
+		cmsRiskinvestService.save(cmsRiskinvest);		
+		return "redirect:"+Global.getFrontPath();		
+	}
+	
+	@RequestMapping(value="insurance/order")
+	public String insruanceorder(Model model){
+		Site site = CmsUtils.getSite(Site.defaultSiteId());
+		CmsInsuranceorder insuranceorder=new CmsInsuranceorder();
+		model.addAttribute("site", site);
+		model.addAttribute("insuranceorder", insuranceorder);
+		return "modules/cms/front/themes/"+site.getTheme()+"/insuranceOrder";
+	}
+	
+	@RequestMapping(value="insurance/save")
+	public String insruancessave(CmsInsuranceorder cmsInsuranceorder){
+		cmsInsuranceorderService.save(cmsInsuranceorder);
+		return "redirect:"+Global.getFrontPath();
 	}
 	
 	/**

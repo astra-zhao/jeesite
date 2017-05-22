@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>订单列表</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="stylesheet" type="text/css" href="css/public.css">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="stylesheet" type="text/css" href="css/zdialog.css">
+</head>
+<body class="body-bg">
+	<header>
+		<div class="head">
+			<a class="iconfont icon-shangchengicon01 top-bar-back" href="javascript:history.back(1)"></a>
+			订单列表
+		</div>	
+	</header>
+	<section class="content-top">
+		<div class="order-content">
+			<ul>
+				<li>
+					<a href="order-details.html">订单号<span>SFSDFDSFWEDSFWEGTW<i class="iconfont icon-jiantou"></i></span></a>
+				</li>
+				<li>保险公司<span>长城保险</span></li>
+				<li>产品类型<span>意外险</span></li>
+				<li>创建时间<span>2016-12-13</span></li>
+			</ul>
+			<div class="order-settlement">
+				<div class="left">
+					合计：<span>￥503.00</span>
+				</div>
+				<div class="right">
+					<a href="#">去支付</a>
+					<a href="#" id="toastBtn">取消订单</a>
+				</div>
+			</div>
+		</div>
+		<div class="order-content">
+			<ul>
+				<li>
+					<a href="order-details.html">订单号<span>SFSDFDSFWEDSFWEGTW<i class="iconfont icon-jiantou"></i></span></a>
+				</li>
+				<li>保险公司<span>长城保险</span></li>
+				<li>产品类型<span>意外险</span></li>
+				<li>创建时间<span>2016-12-13</span></li>
+			</ul>
+			<div class="order-settlement">
+				<div class="left">
+					合计：<span>￥925.00</span>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script type="text/javascript" src="js/jquery220m.js"></script>
+	<script type="text/javascript" src="js/zdialog.js"></script>
+	<script type="text/javascript">
+		$("#toastBtn").click(function(){
+		$.DialogByZ.Autofade({Content: "订单取消成功"})
+   })
+</script>
+</body>
+</html>
