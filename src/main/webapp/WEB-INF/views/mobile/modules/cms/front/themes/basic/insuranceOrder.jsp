@@ -436,7 +436,7 @@
 				</p>
 			<div class="total-expenses mt-30">
 			<div class="button-box">
-				<button type="submit">确认购买</button>
+				<button type="submit">报名参加</button>
 			</div>
 		</section>
 	</form:form>

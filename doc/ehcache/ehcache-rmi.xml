@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
-    xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="false" dynamicConfig="true" 
+    xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="false" dynamicConfig="true"   
     monitoring="autodetect">
 	<!-- <cacheManagerPeerProviderFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory" 
 		properties="peerDiscovery=manual, socketTimeoutMillis=2000, rmiUrls=//localhost:40001/defaultCache" 
 		/> <cacheManagerPeerListenerFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory" 
 		properties="hostName=localhost, port=40000, socketTimeoutMillis=2000"/> -->
 
- 	<!-- <cacheManagerPeerProviderFactory  
+<!-- 	
+	<cacheManagerPeerProviderFactory  
         class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"  
         properties="peerDiscovery=automatic, multicastGroupAddress=230.0.0.1, multicastGroupPort=4446,
-        multicastPacketTimeToLive=32" /> -->
-        
+        multicastPacketTimeToLive=32" />--> 
  	<!-- server1 的cacheManagerPeerProviderFactory配置 -->
     <cacheManagerPeerProviderFactory 
         class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory" 
-        properties="peerDiscovery=manual,rmiUrls=//10.6.2.171:40001/userCache|//10.6.2.171:40001/corpCache|//10.6.2.171:40001/cmsCache|//10.6.2.171:40001/actCache|//10.6.2.171:40001/pageCachingFilter|//10.6.2.171:40001/activeSessionsCache" />-->
+        properties="peerDiscovery=manual,rmiUrls=//10.6.2.19:40002/userCache|//10.6.2.19:40002/corpCache|//10.6.2.19:40002/cmsCache|//10.6.2.19:40002/actCache|//10.6.2.19:40002/pageCachingFilter|//10.6.2.19:40002/activeSessionsCache" />
+		
 	<cacheManagerPeerListenerFactory
 		class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
-		properties="hostName=10.6.2.19, port=40002,socketTimeoutMillis=2000" />
+		properties="hostName=10.6.2.171, port=40001,socketTimeoutMillis=2000" />
 
-	<diskStore path="../temp/jeesitermi1/ehcache" />
+	<diskStore path="../temp/jeesitermi2/ehcache" />
 
 	<!--默认缓存配置 -->
     <defaultCache maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="1200" timeToLiveSeconds="1200" 
