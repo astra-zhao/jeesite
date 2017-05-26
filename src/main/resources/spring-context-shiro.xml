@@ -69,7 +69,7 @@
 	</bean>
 	
 	<!-- 自定义会话管理配置 -->
-	<bean id="sessionManager" class="com.thinkgem.jeesite.common.security.shiro.session.SessionManager"> 
+	<bean id="sessionManager" class="com.thinkgem.jeesite.common.security.shiro.session.SessionManager"> <!-- org.apache.shiro.web.session.mgt.DefaultWebSessionManager -->
 		<property name="sessionDAO" ref="sessionDAO"/>
 		
 		<!-- 会话超时时间，单位：毫秒  -->
@@ -81,34 +81,39 @@
  		<property name="sessionValidationSchedulerEnabled" value="true"/>
  		
 		<property name="sessionIdCookie" ref="sessionIdCookie"/>
+		<property name="sessionIdCookie.path" value="/"/>
 		<property name="sessionIdCookieEnabled" value="true"/>
 	</bean>
 	
 	<!-- 指定本系统SESSIONID, 默认为: JSESSIONID 问题: 与SERVLET容器名冲突, 如JETTY, TOMCAT 等默认JSESSIONID,
 		当跳出SHIRO SERVLET时如ERROR-PAGE容器会为JSESSIONID重新分配值导致登录会话丢失! -->
-	<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+  	<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
 		<!-- 不会暴露给客户端 -->
         <property name="httpOnly" value="true"/>
         <!-- 设置Cookie的过期时间，秒为单位，默认-1表示关闭浏览器时过期Cookie -->
-        <property name="maxAge" value="-1"/>
+        <property name="maxAge" value="-1"/> 
 	    <constructor-arg name="name" value="jeesite.session.id"/>
-	</bean>
-
-	<!-- 自定义Session存储容器 -->
-<!-- 	<bean id="sessionDAO" class="com.thinkgem.jeesite.common.security.shiro.session.JedisSessionDAO"> -->
-<!-- 		<property name="sessionIdGenerator" ref="idGen" /> -->
-<!-- 		<property name="sessionKeyPrefix" value="${redis.keyPrefix}_session_" /> -->
-<!-- 	</bean> -->
-	<bean id="sessionDAO" class="com.thinkgem.jeesite.common.security.shiro.session.CacheSessionDAO">
+	</bean>  
+																		
+	<!-- 自定义Session存储容器-->
+	<bean id="sessionDAO" class="com.thinkgem.jeesite.common.security.shiro.session.JedisSessionDAO">
+ 		<property name="sessionIdGenerator" ref="idGen" />
+ 		<property name="sessionKeyPrefix" value="${redis.keyPrefix}_session_" />
+ 	</bean>
+ 	 
+	<!-- 使用ehcache的Session存储容器
+ 	<bean id="sessionDAO" class="com.thinkgem.jeesite.common.security.shiro.session.CacheSessionDAO">
 		<property name="sessionIdGenerator" ref="idGen" />
 		<property name="activeSessionsCacheName" value="activeSessionsCache" />
 		<property name="cacheManager" ref="shiroCacheManager" />
-	</bean>
+	</bean> -->
 	
-	<!-- 自定义系统缓存管理器-->
-<!-- 	<bean id="shiroCacheManager" class="com.thinkgem.jeesite.common.security.shiro.cache.JedisCacheManager"> -->
-<!-- 		<property name="cacheKeyPrefix" value="${redis.keyPrefix}_cache_" /> -->
-<!-- 	</bean> -->
+	<!-- redis系统缓存管理器
+	<bean id="jedisCacheManager" class="com.thinkgem.jeesite.common.security.shiro.cache.JedisCacheManager">
+ 		<property name="cacheKeyPrefix" value="${redis.keyPrefix}_cache_" />
+ 	</bean>-->
+ 	
+	<!-- ehcache系统缓存管理器-->
 	<bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
 		<property name="cacheManager" ref="cacheManager"/>
 	</bean>

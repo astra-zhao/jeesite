@@ -50,15 +50,16 @@
     	<persistence strategy="localTempSwap"/>
     </cache>
 	
-	<!-- 系统活动会话缓存 -->
+	<!-- 系统活动会话缓存 
     <cache name="activeSessionsCache" maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="120" timeToLiveSeconds="120" 
     	maxEntriesLocalDisk="10000000" diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LFU" statistics="true">
     	<persistence strategy="localTempSwap"/>
-    </cache>
-    <!-- 踢出会话缓存 -->       
+    </cache>-->
+    
+    <!-- 踢出会话缓存       
     <cache name="shiro-kickout-session"  maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="120" timeToLiveSeconds="120" 
     	maxEntriesLocalDisk="10000000" diskExpiryThreadIntervalSeconds="120" memoryStoreEvictionPolicy="LFU" statistics="true">
     	<persistence strategy="localTempSwap"/>
-    </cache>
+    </cache> -->
     	
 </ehcache>

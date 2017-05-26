@@ -15,7 +15,7 @@
  	<!-- server1 的cacheManagerPeerProviderFactory配置 -->
     <cacheManagerPeerProviderFactory 
         class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory" 
-        properties="peerDiscovery=manual,rmiUrls=//10.6.2.171:40001/userCache|//10.6.2.171:40001/corpCache|//10.6.2.171:40001/cmsCache|//10.6.2.171:40001/actCache|//10.6.2.171:40001/pageCachingFilter|//10.6.2.171:40001/activeSessionsCache" />-->
+        properties="peerDiscovery=manual,rmiUrls=//10.6.2.171:40001/userCache|//10.6.2.171:40001/corpCache|//10.6.2.171:40001/cmsCache|//10.6.2.171:40001/actCache|//10.6.2.171:40001/pageCachingFilter" />
 	<cacheManagerPeerListenerFactory
 		class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
 		properties="hostName=10.6.2.19, port=40002,socketTimeoutMillis=2000" />
@@ -127,20 +127,23 @@
         <persistence strategy="localTempSwap"/>
 	</cache>
 
-	<!-- 系统活动会话缓存 -->
+   	<!--服务器（Tomcat）启动就同步其他服务器（Tomcat）中的缓存，时间限制，具体属性不再这里说明 -->
+   	<!--监听缓存事件，缓存移除、修改的时候同步其他服务器（Tomcat）的缓存，时间限制，具体属性不在这里说明 -->
+   	<!-- 系统活动会话缓存 
 	<cache name="activeSessionsCache" maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="1200" timeToLiveSeconds="1200" 
     	maxEntriesLocalDisk="10000000" diskExpiryThreadIntervalSeconds="1200" memoryStoreEvictionPolicy="LFU" statistics="true">
 
-        <!--监听缓存事件，缓存移除、修改的时候同步其他服务器（Tomcat）的缓存，时间限制，具体属性不在这里说明 -->
+
         <cacheEventListenerFactory  
             class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"  
             properties="replicateAsynchronously=true, replicatePuts=true, replicateUpdates=true,replicateUpdatesViaCopy=false, replicateRemovals=true " />
-        <!--服务器（Tomcat）启动就同步其他服务器（Tomcat）中的缓存，时间限制，具体属性不再这里说明 -->
+
         <bootstrapCacheLoaderFactory 
             class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory"
             properties="bootstrapAsynchronously=true"/>
         <persistence strategy="localTempSwap"/>
-	</cache>
+	</cache>-->
+	
 	<!-- 踢出会话缓存 
 	<cache name="shiro-kickout-session" maxElementsInMemory="2000"
 		eternal="false" timeToIdleSeconds="300" timeToLiveSeconds="600"
