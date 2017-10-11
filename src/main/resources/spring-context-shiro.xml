@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
 		http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-4.1.xsd"
@@ -93,15 +94,54 @@
         <!-- 设置Cookie的过期时间，秒为单位，默认-1表示关闭浏览器时过期Cookie -->
         <property name="maxAge" value="-1"/> 
 	    <constructor-arg name="name" value="jeesite.session.id"/>
-	</bean>  
+	</bean>
+	
+	
+	<!-- 开始 使用spring-data-redis对接redis服务端 -->
+	<!--连接池配置-->
+    <!-- <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxIdle" value="${redis.maxIdle}" />
+        <property name="maxTotal" value="${redis.maxTotal}" />
+        <property name="maxWaitMillis" value="${redis.maxWaitMillis}" />
+        <property name="testOnBorrow" value="${redis.testOnBorrow}" /> 
+    </bean>
+    -->
+    <!--工厂配置-->
+    <!-- <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+          p:hostName="${redis.host}"
+          p:port="${redis.port}"
+          p:poolConfig-ref="jedisPoolConfig"/> -->
+          
+    <!--模板配置-->
+    <!-- <bean name="redisTemplate"  
+        class="org.springframework.data.redis.core.StringRedisTemplate"  
+        lazy-init="false">  
+        <property name="connectionFactory" ref="jedisConnectionFactory" />
+        key的序列化
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />
+        </property>
+        value的序列化
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+        </property>
+    </bean>
+     -->
+    
+    <!-- <bean id="sessionDAO" class="com.thinkgem.jeesite.common.security.shiro.session.RedisCacheSessionDao">
+ 		<property name="sessionIdGenerator" ref="idGen" />
+ 	</bean> -->
+ 	
+    <!-- 结束 -->
 																		
-	<!-- 自定义Session存储容器-->
+	<!-- 自定义redis Session存储容器-->
 	<bean id="sessionDAO" class="com.thinkgem.jeesite.common.security.shiro.session.JedisSessionDAO">
  		<property name="sessionIdGenerator" ref="idGen" />
  		<property name="sessionKeyPrefix" value="${redis.keyPrefix}_session_" />
  	</bean>
+ 	
  	 
-	<!-- 使用ehcache的Session存储容器
+	<!-- 使用eache的Session存储容器
  	<bean id="sessionDAO" class="com.thinkgem.jeesite.common.security.shiro.session.CacheSessionDAO">
 		<property name="sessionIdGenerator" ref="idGen" />
 		<property name="activeSessionsCacheName" value="activeSessionsCache" />

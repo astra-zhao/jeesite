@@ -10,8 +10,6 @@ import java.io.ObjectOutputStream;
 import java.lang.reflect.Method;
 
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * 对象操作工具类, 继承org.apache.commons.lang3.ObjectUtils类
@@ -19,7 +17,6 @@ import org.slf4j.LoggerFactory;
  * @version 2014-6-29
  */
 public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
-	private static Logger logger = LoggerFactory.getLogger(JedisUtils.class);
 
 	/**
 	 * 注解到对象复制，只复制能匹配上的方法。
@@ -84,7 +81,8 @@ public class ObjectUtils extends org.apache.commons.lang3.ObjectUtils {
 				return ois.readObject();
 			}
 		} catch (Exception e) {
-			logger.error("unserialize error", e);;
+			e.printStackTrace();
+			return bais;
 		}
 		return null;
 	}

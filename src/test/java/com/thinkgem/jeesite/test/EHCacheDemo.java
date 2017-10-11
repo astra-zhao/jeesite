@@ -26,7 +26,7 @@ public class EHCacheDemo {
 		 cache.put(new Element("key1","values1"));
 		 Element element = cache.get("key1");
 		 
-		 System.out.println(element.getValue());
+		 System.out.println(element.getObjectValue());
 		 Object obj = element.getObjectValue();
 		 System.out.println((String)obj);
 		 manager.shutdown();
