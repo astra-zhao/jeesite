@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.lbtech.platform.modules.ins.inscom.dao.TInscomDao">
+    
+	<sql id="tInscomColumns">
+		a.id AS "id",
+		a.suppliercode AS "suppliercode",
+		a.suppliershowcode AS "suppliershowcode",
+		a.instype AS "instype",
+		a.insclass AS "insclass",
+		a.suppliername AS "suppliername",
+		a.supplierengname AS "supplierengname",
+		a.shortname AS "shortname",
+		a.inssupercode AS "inssupercode",
+		a.hotline AS "hotline",
+		a.linkman AS "linkman",
+		a.founddate AS "founddate",
+		a.remark AS "remark",
+		a.province AS "province",
+		a.city AS "city",
+		a.create_by AS "createBy.id",
+		a.create_date AS "createDate",
+		a.update_by AS "updateBy.id",
+		a.update_date AS "updateDate",
+		a.remarks AS "remarks",
+		a.del_flag AS "delFlag"
+	</sql>
+	
+	<sql id="tInscomJoins">
+	</sql>
+    
+	<select id="get" resultType="TInscom">
+		SELECT 
+			<include refid="tInscomColumns"/>
+		FROM t_inscom a
+		<include refid="tInscomJoins"/>
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="findList" resultType="TInscom">
+		SELECT 
+			<include refid="tInscomColumns"/>
+		FROM t_inscom a
+		<include refid="tInscomJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+			<if test="suppliercode != null and suppliercode != ''">
+				AND a.suppliercode = #{suppliercode}
+			</if>
+			<if test="suppliershowcode != null and suppliershowcode != ''">
+				AND a.suppliershowcode = #{suppliershowcode}
+			</if>
+			<if test="suppliername != null and suppliername != ''">
+				AND a.suppliername = #{suppliername}
+			</if>
+		</where>
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="findAllList" resultType="TInscom">
+		SELECT 
+			<include refid="tInscomColumns"/>
+		FROM t_inscom a
+		<include refid="tInscomJoins"/>
+		<where>
+			a.del_flag = #{DEL_FLAG_NORMAL}
+		</where>		
+		<choose>
+			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
+				ORDER BY ${page.orderBy}
+			</when>
+			<otherwise>
+				ORDER BY a.update_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO t_inscom(
+			id,
+			suppliercode,
+			suppliershowcode,
+			instype,
+			insclass,
+			suppliername,
+			supplierengname,
+			shortname,
+			inssupercode,
+			hotline,
+			linkman,
+			founddate,
+			remark,
+			province,
+			city,
+			create_by,
+			create_date,
+			update_by,
+			update_date,
+			remarks,
+			del_flag
+		) VALUES (
+			#{id},
+			#{suppliercode},
+			#{suppliershowcode},
+			#{instype},
+			#{insclass},
+			#{suppliername},
+			#{supplierengname},
+			#{shortname},
+			#{inssupercode},
+			#{hotline},
+			#{linkman},
+			#{founddate},
+			#{remark},
+			#{province},
+			#{city},
+			#{createBy.id},
+			#{createDate},
+			#{updateBy.id},
+			#{updateDate},
+			#{remarks},
+			#{delFlag}
+		)
+	</insert>
+	
+	<update id="update">
+		UPDATE t_inscom SET 	
+			suppliercode = #{suppliercode},
+			suppliershowcode = #{suppliershowcode},
+			instype = #{instype},
+			insclass = #{insclass},
+			suppliername = #{suppliername},
+			supplierengname = #{supplierengname},
+			shortname = #{shortname},
+			inssupercode = #{inssupercode},
+			hotline = #{hotline},
+			linkman = #{linkman},
+			founddate = #{founddate},
+			remark = #{remark},
+			province = #{province},
+			city = #{city},
+			update_by = #{updateBy.id},
+			update_date = #{updateDate},
+			remarks = #{remarks}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="delete">
+		UPDATE t_inscom SET 
+			del_flag = #{DEL_FLAG_DELETE}
+		WHERE id = #{id}
+	</update>
+	
+</mapper>
