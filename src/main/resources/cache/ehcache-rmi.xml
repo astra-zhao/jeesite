@@ -15,16 +15,16 @@
  	<!-- server1 的cacheManagerPeerProviderFactory配置 -->
     <cacheManagerPeerProviderFactory 
         class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory" 
-        properties="peerDiscovery=manual,rmiUrls=//10.6.2.171:40001/userCache|//10.6.2.171:40001/corpCache|//10.6.2.171:40001/cmsCache|//10.6.2.171:40001/actCache|//10.6.2.171:40001/pageCachingFilter" />
+        properties="peerDiscovery=manual,rmiUrls=//10.6.8.14:40001/userCache|//10.6.8.14:40001/corpCache|//10.6.8.14:40001/cmsCache|//10.6.8.14:40001/actCache|//10.6.8.14:40001/pageCachingFilter" />
 	<cacheManagerPeerListenerFactory
 		class="net.sf.ehcache.distribution.RMICacheManagerPeerListenerFactory"
-		properties="hostName=10.6.2.19, port=40002,socketTimeoutMillis=2000" />
+		properties="hostName=10.6.8.27, port=40002,socketTimeoutMillis=2000" />
 
 	<diskStore path="../temp/jeesitermi1/ehcache" />
 
 	<!--默认缓存配置 -->
     <defaultCache maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="1200" timeToLiveSeconds="1200" 
-    	maxEntriesLocalDisk="10000000" diskExpiryThreadIntervalSeconds="1200" memoryStoreEvictionPolicy="LFU" statistics="true">
+    	maxEntriesLocalDisk="10000" diskExpiryThreadIntervalSeconds="1200" memoryStoreEvictionPolicy="LFU" statistics="true">
 
         <!--监听缓存事件，缓存移除、修改的时候同步其他服务器（Tomcat）的缓存，时间限制，具体属性不在这里说明 -->
         <cacheEventListenerFactory  
@@ -39,7 +39,7 @@
 
 	<!-- 系统缓存 -->
 	<cache name="sysCache" maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="1200" timeToLiveSeconds="1200" 
-    	maxEntriesLocalDisk="10000000" diskExpiryThreadIntervalSeconds="1200" memoryStoreEvictionPolicy="LFU" statistics="true">
+    	maxEntriesLocalDisk="10000" diskExpiryThreadIntervalSeconds="1200" memoryStoreEvictionPolicy="LFU" statistics="true">
 
         <!--监听缓存事件，缓存移除、修改的时候同步其他服务器（Tomcat）的缓存，时间限制，具体属性不在这里说明 -->
         <cacheEventListenerFactory  
@@ -54,7 +54,7 @@
 
 	<!-- 用户缓存 -->
 	<cache name="userCache" maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="1200" timeToLiveSeconds="1200" 
-    	maxEntriesLocalDisk="10000000" diskExpiryThreadIntervalSeconds="1200" memoryStoreEvictionPolicy="LFU" statistics="true">
+    	maxEntriesLocalDisk="10000" diskExpiryThreadIntervalSeconds="1200" memoryStoreEvictionPolicy="LFU" statistics="true">
 
         <!--监听缓存事件，缓存移除、修改的时候同步其他服务器（Tomcat）的缓存，时间限制，具体属性不在这里说明 -->
         <cacheEventListenerFactory  
@@ -69,7 +69,7 @@
 
 	<!-- 用户缓存 -->
 	<cache name="corpCache" maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="1200" timeToLiveSeconds="1200" 
-    	maxEntriesLocalDisk="10000000" diskExpiryThreadIntervalSeconds="1200" memoryStoreEvictionPolicy="LFU" statistics="true">
+    	maxEntriesLocalDisk="10000" diskExpiryThreadIntervalSeconds="1200" memoryStoreEvictionPolicy="LFU" statistics="true">
 
        <!--监听缓存事件，缓存移除、修改的时候同步其他服务器（Tomcat）的缓存，时间限制，具体属性不在这里说明 -->
         <cacheEventListenerFactory  
@@ -84,7 +84,7 @@
 
 	<!-- 内容管理模块缓存 -->
 	<cache name="cmsCache" maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="1200" timeToLiveSeconds="1200" 
-    	maxEntriesLocalDisk="10000000" diskExpiryThreadIntervalSeconds="1200" memoryStoreEvictionPolicy="LFU" statistics="true">
+    	maxEntriesLocalDisk="10000" diskExpiryThreadIntervalSeconds="1200" memoryStoreEvictionPolicy="LFU" statistics="true">
 
         <!--监听缓存事件，缓存移除、修改的时候同步其他服务器（Tomcat）的缓存，时间限制，具体属性不在这里说明 -->
         <cacheEventListenerFactory  
@@ -99,7 +99,7 @@
 
 	<!-- 工作流模块缓存 -->
 	<cache name="actCache" maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="1200" timeToLiveSeconds="1200" 
-    	maxEntriesLocalDisk="10000000" diskExpiryThreadIntervalSeconds="1200" memoryStoreEvictionPolicy="LFU" statistics="true">
+    	maxEntriesLocalDisk="10000" diskExpiryThreadIntervalSeconds="1200" memoryStoreEvictionPolicy="LFU" statistics="true">
 
         <!--监听缓存事件，缓存移除、修改的时候同步其他服务器（Tomcat）的缓存，时间限制，具体属性不在这里说明 -->
         <cacheEventListenerFactory  
@@ -114,7 +114,7 @@
 
 	<!-- 简单页面缓存 -->
 	<cache name="pageCachingFilter" maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="1200" timeToLiveSeconds="1200" 
-    	maxEntriesLocalDisk="10000000" diskExpiryThreadIntervalSeconds="1200" memoryStoreEvictionPolicy="LFU" statistics="true">
+    	maxEntriesLocalDisk="10000" diskExpiryThreadIntervalSeconds="1200" memoryStoreEvictionPolicy="LFU" statistics="true">
 
         <!--监听缓存事件，缓存移除、修改的时候同步其他服务器（Tomcat）的缓存，时间限制，具体属性不在这里说明 -->
         <cacheEventListenerFactory  
@@ -131,7 +131,7 @@
    	<!--监听缓存事件，缓存移除、修改的时候同步其他服务器（Tomcat）的缓存，时间限制，具体属性不在这里说明 -->
    	<!-- 系统活动会话缓存 
 	<cache name="activeSessionsCache" maxElementsInMemory="10000" eternal="false" timeToIdleSeconds="1200" timeToLiveSeconds="1200" 
-    	maxEntriesLocalDisk="10000000" diskExpiryThreadIntervalSeconds="1200" memoryStoreEvictionPolicy="LFU" statistics="true">
+    	maxEntriesLocalDisk="10000" diskExpiryThreadIntervalSeconds="1200" memoryStoreEvictionPolicy="LFU" statistics="true">
 
 
         <cacheEventListenerFactory  

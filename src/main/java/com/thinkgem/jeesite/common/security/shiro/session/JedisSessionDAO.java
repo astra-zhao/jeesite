@@ -31,8 +31,9 @@ import com.thinkgem.jeesite.common.web.Servlets;
 
 /**
  * 自定义授权会话管理类
- * @author ThinkGem
- * @version 2014-7-20
+ * 如果使用spring-data-redis以后，可以不用再使用这个类，这个类只给没有使用spring-data-redis使用
+ * @author Astra-zhao
+ * @version 2016-5-31
  */
 public class JedisSessionDAO extends AbstractSessionDAO implements SessionDAO {
 
@@ -237,8 +238,13 @@ public class JedisSessionDAO extends AbstractSessionDAO implements SessionDAO {
 		try {
 			jedis = JedisUtils.getResource();
 //			if (jedis.exists(sessionKeyPrefix + sessionId)){
-				session = (Session)JedisUtils.toObject(jedis.get(
+				Object object=null;
+				object = JedisUtils.toObject(jedis.get(
 						JedisUtils.getBytesKey(sessionKeyPrefix + sessionId)));
+				if (object instanceof Session) {
+					session = (Session) object;
+					
+				}
 //			}
 			logger.debug("doReadSession {} {}", sessionId, request != null ? request.getRequestURI() : "");
 		} catch (Exception e) {

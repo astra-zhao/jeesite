@@ -1356,6 +1356,33 @@ CREATE TABLE `test_tree` (
 
 /*Data for the table `test_tree` */
 
+DROP TABLE IF EXISTS `t_inscom`;
+
+CREATE TABLE `t_inscom` (
+  `id` varchar(64) NOT NULL,
+  `SUPPLIERCODE` varchar(20) NOT NULL,
+  `SUPPLIERSHOWCODE` varchar(20) DEFAULT NULL,
+  `INSTYPE` varchar(10) NOT NULL,
+  `INSCLASS` varchar(2) DEFAULT NULL,
+  `SUPPLIERNAME` varchar(200) DEFAULT NULL,
+  `SUPPLIERENGNAME` varchar(200) DEFAULT NULL,
+  `SHORTNAME` varchar(150) DEFAULT NULL,
+  `INSSUPERCODE` varchar(20) DEFAULT NULL,
+  `HOTLINE` varchar(30) DEFAULT NULL,
+  `LINKMAN` varchar(13) DEFAULT NULL,
+  `FOUNDDATE` date DEFAULT NULL,
+  `REMARK` varchar(80) DEFAULT NULL,
+  `PROVINCE` varchar(80) DEFAULT NULL,
+  `CITY` varchar(80) DEFAULT NULL,
+  `create_by` varbinary(64) NOT NULL,
+  `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `update_by` varchar(64) NOT NULL,
+  `update_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `remarks` varchar(255) DEFAULT NULL,
+  `del_flag` char(1) NOT NULL DEFAULT '0' COMMENT '删除标记（0：正常；1：删除）',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
